@@ -7,16 +7,19 @@ function refresh() {
         return response.json();
     }).then(function(response) {
         // Remove current <tr>s
-        document.querySelectorAll("tr:not(.header)").forEach((tr) => {
-            document.querySelector("table").removeChild(tr);
+        document.querySelectorAll("tbody tr").forEach((tr) => {
+            document.querySelector("tbody").removeChild(tr);
         });
 
         // Add new <tr>s
         response.forEach(entry => {
             var tr = document.createElement('tr');
-            tr.innerHTML = "<td>" + entry.id + "</td><td>" + entry.location + "</td><td>" + entry.count + "</td>";
+            tr.innerHTML = "<td>" + entry.id + "</td>" +
+                "<td>" + entry.location + "</td>" +
+                "<td>" + entry.count + "</td>" +
+                "<td>" + entry.date + "</td>";
 
-            document.querySelector("table").appendChild(tr);
+            document.querySelector("tbody").appendChild(tr);
         });
     }).catch(function(err) {
         // Catch on error
